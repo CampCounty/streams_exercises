@@ -15,8 +15,21 @@ class TimeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Time Screen'),
       ),
-      body: const Center(
-        child: Text("Hier soll die Uhrzeit stehen"),
+      body: Center(
+        child: StreamBuilder<DateTime>(
+          stream: timeRepository.dateTimeStream,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return const Text('Error occurred');
+            } else if (snapshot.hasData) {
+              return Text('Current Time: ${snapshot.data}');
+            } else {
+              return const Text('Stream completed');
+            }
+          },
+        ),
       ),
     );
   }
