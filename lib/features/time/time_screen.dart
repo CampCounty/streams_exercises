@@ -15,6 +15,8 @@ class TimeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Time Screen'),
       ),
+      backgroundColor:
+          Colors.black, // Hintergrundfarbe des gesamten Bildschirms
       body: Center(
         child: StreamBuilder<DateTime>(
           stream: timeRepository.dateTimeStream,
@@ -24,7 +26,14 @@ class TimeScreen extends StatelessWidget {
             } else if (snapshot.hasError) {
               return const Text('Error occurred');
             } else if (snapshot.hasData) {
-              return Text('Current Time: ${snapshot.data}');
+              return Text(
+                'Current Time: ${snapshot.data}',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.amber, // Gold color
+                ),
+              );
             } else {
               return const Text('Stream completed');
             }

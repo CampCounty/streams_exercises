@@ -3,6 +3,6 @@ class NumberRepository {
     return Stream.periodic(
       const Duration(seconds: 1),
       (x) => x,
-    ).take(10);
+    ).take(1000);
   }
 }
